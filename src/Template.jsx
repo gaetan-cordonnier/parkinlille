@@ -92,8 +92,6 @@ export default function PersistentDrawerLeft() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
-  console.log(resp);
-
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -174,7 +172,7 @@ export default function PersistentDrawerLeft() {
         })}
       >
         <div className={classes.drawerHeader} />
-        <Map {} />
+        <Map />
       </main>
     </div>
   );

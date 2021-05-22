@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { makeStyles, TextField } from "@material-ui/core";
 
@@ -17,18 +17,6 @@ const SearchBar = () => {
   const classes = useStyles();
   const [address, setAddress] = useState([]);
   const [state, dispatch] = useEnderValue();
-
-  useEffect(() => {
-    dispatch({
-      type: "SET_COORDS",
-      latitude: 50.63321968095209,
-      longitude: 3.072508598298858,
-    });
-    dispatch({
-      type: "SET_LOCATION",
-      location: "Mairie de Lille",
-    });
-  }, []);
 
   const searchLocation = async () => {
     axios

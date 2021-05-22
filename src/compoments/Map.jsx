@@ -15,6 +15,18 @@ const Map = () => {
   const [lat, setLat] = useState(50.63321968095209);
   const [lng, setLng] = useState(3.072508598298858);
 
+  useEffect(() => {
+    dispatch({
+      type: "SET_COORDS",
+      latitude: 50.63321968095209,
+      longitude: 3.072508598298858,
+    });
+    dispatch({
+      type: "SET_LOCATION",
+      location: "Mairie de Lille",
+    });
+  }, []);
+
   function SetViewOnClick({ coords }) {
     const map = useMap();
     map.panTo(coords, map.getZoom());
