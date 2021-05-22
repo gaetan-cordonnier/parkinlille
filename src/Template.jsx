@@ -87,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PersistentDrawerLeft(resp) {
+export default function PersistentDrawerLeft() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -174,7 +174,7 @@ export default function PersistentDrawerLeft(resp) {
         })}
       >
         <div className={classes.drawerHeader} />
-        <Map {...resp} />
+        <Map {} />
       </main>
     </div>
   );

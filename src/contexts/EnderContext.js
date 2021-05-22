@@ -3,10 +3,10 @@ import { createContext, useContext, useReducer } from "react";
 const initialState = {
   latitude: "",
   longitude: "",
+  location: "",
 };
 
 const reducer = (state, action) => {
-  console.log(action);
   switch (action.type) {
     case "SET_LOCATION":
       return { ...state, location: action.location };

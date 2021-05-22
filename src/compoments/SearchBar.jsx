@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
 
 const SearchBar = () => {
   const classes = useStyles();
-  const [resp, setResp] = useState({});
   const [address, setAddress] = useState([]);
   const [state, dispatch] = useEnderValue();
 
@@ -40,7 +39,6 @@ const SearchBar = () => {
           })
       )
       .then(({ data }) => {
-        setResp({ data });
         dispatch({
           type: "SET_COORDS",
           latitude: data.features[0].geometry.coordinates[1],
