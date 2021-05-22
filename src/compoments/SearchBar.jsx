@@ -32,15 +32,12 @@ const SearchBar = () => {
           latitude: data.features[0].geometry.coordinates[1],
           longitude: data.features[0].geometry.coordinates[0],
         });
-        dispatch({
-          type: "SET_LOCATION",
-          location: data.features[0].properties.label,
-        });
       })
       .catch(function (error) {
         console.log("Search address request failed", error);
       });
   };
+
   return (
     <>
       <TextField
