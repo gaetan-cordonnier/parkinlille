@@ -6,6 +6,7 @@ import {
   Popup,
   useMap,
   Circle,
+  LayersControl,
 } from "react-leaflet";
 import PMR_Icon from "./PMR_Icon";
 import Pin_Icon from "./Pin_Icon";
@@ -92,40 +93,54 @@ const Map = () => {
         margin: "0%",
       }}
     >
-      <TileLayer
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <Marker position={[lat, lng]} icon={Pin_Icon}>
-        <Popup>
-          <span>
-            {state.location
-              ? `${state.location}`
-              : "9 rue Saint Sauveur 59800 Lille"}
-          </span>
-        </Popup>
-        <SetViewOnClick coords={[lat, lng]} />
-      </Marker>
-      {places.map((place, id) => (
-        <Marker
-          key={id}
-          position={[
-            place.geometry.coordinates[1],
-            place.geometry.coordinates[0],
-          ]}
-          icon={PMR_Icon}
-        >
+      <LayersControl position="topright">
+        <LayersControl.BaseLayer checked name="Theme Stardard">
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+        </LayersControl.BaseLayer>
+        <LayersControl.BaseLayer name="Theme Sombre">
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
+          />
+        </LayersControl.BaseLayer>
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        />
+        <Marker position={[lat, lng]} icon={Pin_Icon}>
           <Popup>
-            <span>{"Une place PMR ici !"}</span>
+            <span>
+              {state.location
+                ? `${state.location}`
+                : "9 rue Saint Sauveur 59800 Lille"}
+            </span>
           </Popup>
+          <SetViewOnClick coords={[lat, lng]} />
         </Marker>
-      ))}
-      <Circle
-        center={[lat, lng]}
-        radius={500}
-        color={"#696969"}
-        fillColor={"#455A64"}
-      />
+        {places.map((place, id) => (
+          <Marker
+            key={id}
+            position={[
+              place.geometry.coordinates[1],
+              place.geometry.coordinates[0],
+            ]}
+            icon={PMR_Icon}
+          >
+            <Popup>
+              <span>{"Place PMR"}</span>
+            </Popup>
+          </Marker>
+        ))}
+        <Circle
+          center={[lat, lng]}
+          radius={500}
+          color={"#696969"}
+          fillColor={"#455A64"}
+        />
+      </LayersControl>
     </MapContainer>
   );
 };
