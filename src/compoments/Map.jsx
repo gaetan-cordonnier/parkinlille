@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import {
   MapContainer,
   TileLayer,
@@ -8,8 +7,10 @@ import {
   useMap,
   Circle,
 } from "react-leaflet";
+import PMR_Icon from "./PMR_Icon";
+import Pin_Icon from "./Pin_Icon";
+import axios from "axios";
 
-import { SEARCH_ADRESS_URL } from "../env";
 import { useEnderValue } from "./../contexts/EnderContext";
 
 const Map = () => {
@@ -18,6 +19,8 @@ const Map = () => {
   const defaultLng = 3.0708119630820554;
   const [lat, setLat] = useState(50.63271104278013);
   const [lng, setLng] = useState(3.0708119630820554);
+  const [places, setPlaces] = useState([]);
+  console.log(places);
 
   useEffect(() => {
     dispatch({
@@ -49,7 +52,7 @@ const Map = () => {
   const searchLocation = async () => {
     axios
       .get(
-        `${SEARCH_ADRESS_URL}reverse/?lon=${state.longitude}&lat=${state.latitude}`
+        "https://api-adresse.data.gouv.fr/reverse/?lon=${state.longitude}&lat=${state.latitude}"
       )
       .then(({ data }) => {
         dispatch({
@@ -61,6 +64,21 @@ const Map = () => {
         console.log("Reverse address request failed", error);
       });
   };
+
+  useEffect(() => {
+    if ((lat, lng)) {
+      axios
+        .get(
+          "https://opendata.lillemetropole.fr/api/records/1.0/search/?dataset=places-pmr&q=&rows=20"
+        )
+        .then(({ data }) => {
+          setPlaces(data.records);
+        })
+        .catch(function (error) {
+          console.log("Reverse address request failed", error);
+        });
+    }
+  }, [lat, lng]);
 
   return (
     <MapContainer
@@ -78,7 +96,7 @@ const Map = () => {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={[lat, lng]}>
+      <Marker position={[lat, lng]} icon={Pin_Icon}>
         <Popup>
           <span>
             {state.location
@@ -88,10 +106,24 @@ const Map = () => {
         </Popup>
         <SetViewOnClick coords={[lat, lng]} />
       </Marker>
+      {places.map((place, id) => (
+        <Marker
+          key={id}
+          position={[
+            place.geometry.coordinates[1],
+            place.geometry.coordinates[0],
+          ]}
+          icon={PMR_Icon}
+        >
+          <Popup>
+            <span>{"Une place PMR ici !"}</span>
+          </Popup>
+        </Marker>
+      ))}
       <Circle
         center={[lat, lng]}
         radius={500}
-        color={"#292929"}
+        color={"#696969"}
         fillColor={"#455A64"}
       />
     </MapContainer>

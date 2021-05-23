@@ -1,8 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { makeStyles, TextField } from "@material-ui/core";
 
-import { SEARCH_ADRESS_URL } from "../env";
 import { useEnderValue } from "./../contexts/EnderContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -10,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
     backgroundColor: "#595959",
     marginLeft: theme.spacing(2),
+    maxWidth: "500px",
   },
 }));
 
@@ -21,7 +21,7 @@ const SearchBar = () => {
   const searchLocation = async () => {
     axios
       .get(
-        `${SEARCH_ADRESS_URL}search?` +
+        "https://api-adresse.data.gouv.fr/search?" +
           new URLSearchParams({
             q: address,
           })
