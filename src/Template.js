@@ -10,7 +10,6 @@ import {
   Divider,
   IconButton,
   BottomNavigation,
-  Hidden,
 } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 // import List from "@material-ui/core/List";
