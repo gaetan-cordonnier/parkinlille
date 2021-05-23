@@ -53,7 +53,7 @@ const Map = () => {
   const searchLocation = async () => {
     axios
       .get(
-        "https://api-adresse.data.gouv.fr/reverse/?lon=${state.longitude}&lat=${state.latitude}"
+        `https://api-adresse.data.gouv.fr/reverse/?lon=${state.longitude}&lat=${state.latitude}`
       )
       .then(({ data }) => {
         dispatch({
