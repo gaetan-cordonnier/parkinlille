@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { makeStyles, TextField } from "@material-ui/core";
-
 import { useEnderValue } from "./../contexts/EnderContext";
 
 const useStyles = makeStyles((theme) => ({
   textField: {
     marginRight: theme.spacing(1),
-    backgroundColor: "#595959",
+    backgroundColor: "#696969",
     marginLeft: theme.spacing(2),
     maxWidth: "500px",
+    border: "none",
+    borderRadius: "35px",
+  },
+  noBorder: {
+    border: "none",
   },
 }));
 
@@ -24,7 +28,8 @@ const SearchBar = () => {
         "https://api-adresse.data.gouv.fr/search?" +
           new URLSearchParams({
             q: address,
-          })
+          }) +
+          "&limit=5"
       )
       .then(({ data }) => {
         dispatch({
@@ -52,6 +57,9 @@ const SearchBar = () => {
           if (event.key === "Enter") {
             searchLocation();
           }
+        }}
+        InputProps={{
+          classes: { notchedOutline: classes.noBorder },
         }}
       />
     </>

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core";
 import {
   MapContainer,
   TileLayer,
@@ -14,14 +15,21 @@ import axios from "axios";
 
 import { useEnderValue } from "./../contexts/EnderContext";
 
+const useStyles = makeStyles((theme) => ({
+  map: {
+    position: "absolute",
+    width: "100%",
+  },
+}));
+
 const Map = () => {
+  const classes = useStyles();
   const [state, dispatch] = useEnderValue();
   const defaultLat = 50.63271104278013;
   const defaultLng = 3.0708119630820554;
   const [lat, setLat] = useState(50.63271104278013);
   const [lng, setLng] = useState(3.0708119630820554);
   const [places, setPlaces] = useState([]);
-  console.log(places);
 
   useEffect(() => {
     dispatch({
@@ -87,11 +95,7 @@ const Map = () => {
       zoomControl={false}
       zoom={15}
       minZoom={6}
-      style={{
-        height: "100%",
-        width: "100%",
-        margin: "0%",
-      }}
+      className={classes.map}
     >
       <LayersControl position="topright">
         <LayersControl.BaseLayer checked name="Theme Stardard">

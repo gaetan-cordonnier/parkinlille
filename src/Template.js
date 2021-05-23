@@ -1,28 +1,32 @@
 import React from "react";
 import clsx from "clsx";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
+import {
+  makeStyles,
+  useTheme,
+  AppBar,
+  Drawer,
+  Toolbar,
+  Typography,
+  Divider,
+  IconButton,
+  BottomNavigation,
+  Hidden,
+} from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
+// import List from "@material-ui/core/List";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+// import ListItem from "@material-ui/core/ListItem";
+// import ListItemIcon from "@material-ui/core/ListItemIcon";
+// import ListItemText from "@material-ui/core/ListItemText";
+// import InboxIcon from "@material-ui/icons/MoveToInbox";
+// import MailIcon from "@material-ui/icons/Mail";
 
 import Map from "./compoments/Map";
 import SearchBar from "./compoments/SearchBar";
 
 const drawerWidth = 240;
-const header = 65;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,23 +71,32 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
+    width: "100%",
+    height: "auto",
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    height: `calc(100vh - ${header}px)`,
     marginLeft: -drawerWidth,
   },
   contentShift: {
+    backgroundColor: "#000",
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
     marginLeft: 0,
   },
+  bottomNavigation: {
+    zIndex: "1000",
+    backgroundColor: "#292929",
+    height: "30px",
+    width: "100%",
+    position: "fixed",
+    bottom: 0,
+  },
   title: {
     fontFamily: "Pattaya",
-    color: "#e9dc2f",
   },
 }));
 
@@ -117,11 +130,8 @@ export default function PersistentDrawerLeft() {
             edge="start"
             className={clsx(classes.menuButton, open && classes.hide)}
           >
-            <MenuIcon />
+            <MenuIcon color="primary" />
           </IconButton>
-          <Typography variant="h6" noWrap className={classes.title}>
-            Park'in Lille
-          </Typography>
           <SearchBar />
         </Toolbar>
       </AppBar>
@@ -135,6 +145,14 @@ export default function PersistentDrawerLeft() {
         }}
       >
         <div className={classes.drawerHeader}>
+          <Typography
+            variant="h6"
+            noWrap
+            color="secondary"
+            className={classes.title}
+          >
+            Park'in Lille Menu
+          </Typography>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "ltr" ? (
               <ChevronLeftIcon />
@@ -144,7 +162,7 @@ export default function PersistentDrawerLeft() {
           </IconButton>
         </div>
         <Divider />
-        <List>
+        {/* <List>
           {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>
@@ -164,15 +182,25 @@ export default function PersistentDrawerLeft() {
               <ListItemText primary={text} />
             </ListItem>
           ))}
-        </List>
+        </List> */}
       </Drawer>
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}
       >
-        <div className={classes.drawerHeader} />
+        <div width="100%" height="100vh" className={classes.drawerHeader} />
         <Map />
+        <BottomNavigation className={classes.bottomNavigation}>
+          <Typography
+            variant="h6"
+            noWrap
+            color="primary"
+            className={classes.title}
+          >
+            Park'in Lille
+          </Typography>
+        </BottomNavigation>
       </main>
     </div>
   );
