@@ -41,7 +41,7 @@ const SearchBar = () => {
   return (
     <>
       <TextField
-        placeholder="24 rue du 8 Mai 1945..."
+        placeholder="Adresse..."
         type="search"
         variant="outlined"
         size="small"

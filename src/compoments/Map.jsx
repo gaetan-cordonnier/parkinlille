@@ -106,20 +106,6 @@ const Map = () => {
             url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
           />
         </LayersControl.BaseLayer>
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        />
-        <Marker position={[lat, lng]} icon={Pin_Icon}>
-          <Popup>
-            <span>
-              {state.location
-                ? `${state.location}`
-                : "9 rue Saint Sauveur 59800 Lille"}
-            </span>
-          </Popup>
-          <SetViewOnClick coords={[lat, lng]} />
-        </Marker>
         {places.map((place, id) => (
           <Marker
             key={id}
@@ -140,6 +126,16 @@ const Map = () => {
           color={"#696969"}
           fillColor={"#455A64"}
         />
+        <Marker position={[lat, lng]} icon={Pin_Icon}>
+          <Popup>
+            <span>
+              {state.location
+                ? `${state.location}`
+                : "9 rue Saint Sauveur 59800 Lille"}
+            </span>
+          </Popup>
+          <SetViewOnClick coords={[lat, lng]} />
+        </Marker>
       </LayersControl>
     </MapContainer>
   );
