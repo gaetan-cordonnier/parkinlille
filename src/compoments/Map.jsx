@@ -70,7 +70,7 @@ const Map = () => {
     if ((lat, lng)) {
       axios
         .get(
-          "https://opendata.lillemetropole.fr/api/records/1.0/search/?dataset=places-pmr&q=&rows=20"
+          `https://opendata.lillemetropole.fr/api/records/1.0/search/?dataset=places-pmr&q=&rows=20&geofilter.distance=${lat}%2C+${lng}%2C+2000`
         )
         .then(({ data }) => {
           setPlaces(data.records);
