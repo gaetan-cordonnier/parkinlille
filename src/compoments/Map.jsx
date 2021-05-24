@@ -13,12 +13,18 @@ import PMR_Icon from "./PMR_Icon";
 import Pin_Icon from "./Pin_Icon";
 import axios from "axios";
 
+import GeoLocation from "./GeoLocation";
 import { useEnderValue } from "./../contexts/EnderContext";
 
 const useStyles = makeStyles((theme) => ({
   map: {
     position: "absolute",
     width: "100%",
+  },
+  button: {
+    zIndex: "2000",
+    marginTop: "100px",
+    position: "absolute",
   },
 }));
 
@@ -140,6 +146,7 @@ const Map = () => {
           </Popup>
           <SetViewOnClick coords={[lat, lng]} />
         </Marker>
+        <GeoLocation />
       </LayersControl>
     </MapContainer>
   );

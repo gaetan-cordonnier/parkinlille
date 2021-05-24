@@ -9,7 +9,6 @@ import {
   Typography,
   Divider,
   IconButton,
-  BottomNavigation,
 } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 // import List from "@material-ui/core/List";
@@ -24,6 +23,7 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
 import Map from "./compoments/Map";
 import SearchBar from "./compoments/SearchBar";
+// import { CenterFocusStrong } from "@material-ui/icons";
 
 const drawerWidth = 240;
 
@@ -87,15 +87,28 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 0,
   },
   bottomNavigation: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    fontFamily: "Pattaya",
     zIndex: "1000",
     backgroundColor: "#292929",
     height: "30px",
     width: "100%",
     position: "fixed",
     bottom: 0,
+    color: "#e9dc2f",
+    textAlign: "center",
   },
   title: {
+    fontSize: "18px",
     fontFamily: "Pattaya",
+    color: "#e9dc2f",
+  },
+  menuTitle: {
+    fontFamily: "Pattaya",
+    color: "#292929",
   },
 }));
 
@@ -144,12 +157,7 @@ export default function PersistentDrawerLeft() {
         }}
       >
         <div className={classes.drawerHeader}>
-          <Typography
-            variant="h6"
-            noWrap
-            color="secondary"
-            className={classes.title}
-          >
+          <Typography variant="h6" noWrap className={classes.menuTitle}>
             Park'in Lille Menu
           </Typography>
           <IconButton onClick={handleDrawerClose}>
@@ -190,16 +198,9 @@ export default function PersistentDrawerLeft() {
       >
         <div width="100%" height="100vh" className={classes.drawerHeader} />
         <Map />
-        <BottomNavigation className={classes.bottomNavigation}>
-          <Typography
-            variant="h6"
-            noWrap
-            color="primary"
-            className={classes.title}
-          >
-            Park'in Lille
-          </Typography>
-        </BottomNavigation>
+        <div className={classes.bottomNavigation}>
+          <h1 className={classes.title}>Park'in Lille</h1>
+        </div>
       </main>
     </div>
   );
